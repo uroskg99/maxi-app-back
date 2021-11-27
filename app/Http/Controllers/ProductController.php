@@ -29,4 +29,11 @@ class ProductController extends Controller
             'lastPage' => ceil($total / $perPage)
         ];
     }
+    
+    public function getElementById($id) {
+            $result = Product::where('_id', $id)->get();
+            return [
+                'product' => $result
+            ];
+    }
 }
