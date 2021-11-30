@@ -17,3 +17,4 @@ use App\Http\Controllers\ProductController;
 
 Route::get('products/getAllProducts', [ProductController::class, "getAllProducts"]);
 Route::get('products/search', [ProductController::class, 'search']);
+Route::get('/products/{id}', [ProductController::class, 'getElementById']);
