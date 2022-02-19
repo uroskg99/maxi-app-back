@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,6 @@ Route::get('/products/getAllProducts', [ProductController::class, "getAllProduct
 Route::get('/products/search', [ProductController::class, 'search']);
 Route::get('/products/searchv2', [ProductController::class, 'searchv2']);
 Route::get('/products/{id}', [ProductController::class, 'getElementById']);
+
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
