@@ -57,4 +57,28 @@ class ProductController extends Controller
             'lastPage' => ceil($total / $perPage)
         ];
     }
+
+    public function addNewProduct(Request $request) {
+        $product = Product::where('name', $request['name'])->first();
+
+        if($product) {
+            $response['status'] = 0;
+            $response['message'] = 'Product with the same name already exists';
+            $response['code'] = 409;
+        } else {
+            $product = Product::create([
+                'name' => $request->name,
+                'category' => $request->category,
+                'picture' => $request->picture,
+                'price' => $request->price,
+                'quantity' => $request->quantity
+            ]);
+
+            $response['status'] = 1;
+            $response['message'] = 'Product added successfully';
+            $response['code'] = 200;
+        }
+
+        return response()->json($response);
+    }
 }

@@ -22,5 +22,8 @@ Route::get('/products/search', [ProductController::class, 'search']);
 Route::get('/products/searchv2', [ProductController::class, 'searchv2']);
 Route::get('/products/{id}', [ProductController::class, 'getElementById']);
 
+Route::post('/products/addNewProduct', [ProductController::class, 'addNewProduct']);
+
+
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
