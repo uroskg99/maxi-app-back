@@ -22,9 +22,9 @@ class AuthController extends Controller
             $response['code'] = 409;
         } else {
             $admin = Admin::create([
-                'username' => $request->username,
-                'email' => $request->email,
-                'password' => bcrypt($request->password)
+                'username' => $request->input("username"),
+                'email' => $request->input("email"),
+                'password' => bcrypt($request->input("password"))
             ]);
     
             $response['status'] = 1;

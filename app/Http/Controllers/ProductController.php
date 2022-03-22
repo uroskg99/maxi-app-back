@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function getAllProducts() {
-        return Product::all();
+        $result = Product::all();
+
+        return [
+            'products' => $result
+        ];
     }
 
     public function search(Request $request) {
@@ -80,5 +84,52 @@ class ProductController extends Controller
         }
 
         return response()->json($response);
+    }
+
+    function deleteProduct(Request $request) {
+        $data = Product::where('_id', $request->get('_id'))->first();
+        if($data) {
+            $data->delete();
+
+            $response['status'] = 1;
+            $response['message'] = 'Product deleted successfully';
+            $response['code'] = 200;
+    
+            return response()->json($response);
+        }
+        else {
+            $response['status'] = 0;
+            $response['message'] = "Product didn't delete successfully";
+            $response['code'] = 409;
+    
+            return response()->json($response);
+        }
+    }
+
+    public function updateProduct(Request $request) {
+        $result = Product::where('_id', $request->get('_id'))->first();
+
+        $result->name = $request->get('name');
+        $result->price = $request->get('price');
+        $result->quantity = $request->get('quantity');
+        $result->picture = $request->get('picture');
+        $result->category = $request->get('category');
+
+        $result->update();
+
+        if($result) {
+            $response['status'] = 1;
+            $response['message'] = 'Product updated successfully';
+            $response['code'] = 200;
+
+            return response()->json($response);
+        }
+        else {
+            $response['status'] = 0;
+            $response['message'] = "Product didn't update successfully";
+            $response['code'] = 409;
+    
+            return response()->json($response);
+        }
     }
 }

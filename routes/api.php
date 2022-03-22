@@ -23,7 +23,8 @@ Route::get('/products/searchv2', [ProductController::class, 'searchv2']);
 Route::get('/products/{id}', [ProductController::class, 'getElementById']);
 
 Route::post('/products/addNewProduct', [ProductController::class, 'addNewProduct']);
-
+Route::post('/products/updateProduct', [ProductController::class, 'updateProduct']);
+Route::post('/products/deleteProduct', [ProductController::class, 'deleteProduct']);
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
